@@ -110,6 +110,7 @@ class ApplicantsJU(WuzzufGui, ReadCsvData):
 
 '''Class of City Bar Chart >> print bar chart for each job within a unique city'''
 
+
 class CityBarChart(WuzzufGui, ReadCsvData):
     # Read app_sample Data
     df = pd.DataFrame(ReadCsvData.posts_sample)
@@ -141,35 +142,100 @@ class CityBarChart(WuzzufGui, ReadCsvData):
         plt.legend()
         plt.show()
 
+
+'''Class meanSalaries prints all jobs and the mean salary of each one'''
+
+class meanSalaries(WuzzufGui, ReadCsvData):
+    # Read app_sample Data
+    df = pd.DataFrame(ReadCsvData.posts_sample)
+
+    def meanSalary(self):
+        job_titles = self.df.ix[:, 'job_title']
+        job_set = set(job_titles)
+        job_list = [x for x in job_set]
+
+        min_s = self.df.ix[:, 'salary_minimum']
+        min_set = set(min_s)
+        min_list = [x for x in min_set]
+
+        max_s = self.df.ix[:, 'salary_minimum']
+        max_set = set(max_s)
+        max_list = [x for x in max_set]
+
+        mean = []
+        for i in range(len(max_list)):
+            mean.append((max_list[i] + min_list[i]) / 2.0)
+        print(job_list)
+        print(mean)
+
+
+'''Bonus Tip: Print some values that salary is less than some value'''
+
+
+class bonusTip(WuzzufGui, ReadCsvData):
+    from tkinter import StringVar
+    from tkinter import ttk
+    # Read app_sample Data
+    df = pd.DataFrame(ReadCsvData.posts_sample)
+
+    list_of_index = [x for x in df]
+
+    salariesSet = set(df.ix[:, 'salary_maximum'].head())
+    salaries = [x for x in salariesSet]
+
+    val1 = StringVar()
+    val2 = StringVar()
+
+    combo1 = ttk.Combobox(width=25, textvariable=val1)
+    combo1.grid(column=1, row=10)
+    combo1['values'] = list_of_index
+
+    combo2 = ttk.Combobox(width=15, textvariable=val2)
+    combo2.grid(column=2, row=10)
+    combo2['values'] = salaries
+
+    def print_btn(self):
+        myVal = self.df.loc[self.df.salary_minimum <= int(self.val2.get()), self.val1.get()]
+        print(myVal)
+
 rt = WuzzufGui() # Draw the Ui
 
 # Category Data
 categPie = CategoryPChart()
 category_label = rt.lbl(rt.root, text="(1) Choose Category To print its Pie Chart: ",
                         padx=10, font="sans-serif").grid(column=0, row=0)
-button1 = rt.btn(rt.root, text="Category 1", padx=5, command=categPie.category1PieChart).grid(column=1, row=0)
-button2 = rt.btn(rt.root, text="Category 2", padx=5, command=categPie.category2PieChart).grid(column=2, row=0)
-button3 = rt.btn(rt.root, text="Category 3", padx=5, command=categPie.category3PieChart).grid(column=3, row=0)
+button1 = rt.btn(rt.root, text="Category 1", padx=5, command=categPie.category1PieChart, bg="gray").grid(column=1, row=0)
+button2 = rt.btn(rt.root, text="Category 2", padx=5, command=categPie.category2PieChart, bg="gray").grid(column=2, row=0)
+button3 = rt.btn(rt.root, text="Category 3", padx=5, command=categPie.category3PieChart, bg="gray").grid(column=3, row=0)
 
 # Industry Data
 industPie = IndustryPChart()
 indust_label = rt.lbl(rt.root, text="(2) Choose Industry to print its Pie Chart: "
                       , font="sans-serif").grid(column=0, row=2)
-indst_button1 = rt.btn(rt.root, text="Industry 1", padx=5,command=industPie.industry1PieChart).grid(column=1, row=2)
-indst_button2 = rt.btn(rt.root, text="Industry 2", padx=5,command=industPie.industry2PieChart).grid(column=2, row=2)
-indst_button3 = rt.btn(rt.root, text="Industry 3", padx=5,command=industPie.industry3PieChart).grid(column=3, row=2)
+indst_button1 = rt.btn(rt.root, text="Industry 1", padx=5, command=industPie.industry1PieChart, bg="gray").grid(column=1, row=2)
+indst_button2 = rt.btn(rt.root, text="Industry 2", padx=5, command=industPie.industry2PieChart, bg="gray").grid(column=2, row=2)
+indst_button3 = rt.btn(rt.root, text="Industry 3", padx=5, command=industPie.industry3PieChart, bg="gray").grid(column=3, row=2)
 
 # Job Applicants and Users' Jobs
 JobUserBar = ApplicantsJU()
 JUB_label = rt.lbl(rt.root, text="(3) Choose User or Job Bar Chart: ", font="sans-serif").grid(column=0, row=4)
-JUB_button1 = rt.btn(rt.root, text="Job-User", padx=5, command=JobUserBar.JobUserApplicant).grid(column=1, row=4)
-JUB_button2 = rt.btn(rt.root, text="User-Job", padx=5, command=JobUserBar.UserJobApplicant).grid(column=2, row=4)
+JUB_button1 = rt.btn(rt.root, text="Job-User", padx=5, command=JobUserBar.JobUserApplicant, bg="gray").grid(column=1, row=4)
+JUB_button2 = rt.btn(rt.root, text="User-Job", padx=5, command=JobUserBar.UserJobApplicant, bg="gray").grid(column=2, row=4)
 
 
 # City Bar Chart.
 citybchart = CityBarChart()
 city_label = rt.lbl(rt.root, text="(4) Preview bar chart for each cities' jobs: ", font="sans-serif").grid(column=0, row=6)
-city_button = rt.btn(rt.root, text="Cities' jobs", padx=5, command=citybchart.cityBCh).grid(column=1, row=6)
-city_button2 = rt.btn(rt.root, text="Views", padx=5, command=citybchart.viewsBch).grid(column=2, row=6)
+city_button = rt.btn(rt.root, text="Cities' jobs", padx=5, command=citybchart.cityBCh, bg="gray").grid(column=1, row=6)
+city_button2 = rt.btn(rt.root, text="Views", padx=5, command=citybchart.viewsBch, bg="gray").grid(column=2, row=6)
 
+# Mean Salary
+meansalary = meanSalaries()
+mean_label = rt.lbl(rt.root, text="(5) Print the Mean Salary of each Job: ", font="sans-serif").grid(column=0, row=8)
+mean_button = rt.btn(rt.root, text="Mean Salaries", padx=5, command=meansalary.meanSalary, bg="gray").grid(column=1, row=8)
+
+# Bonus Tip
+bonustip = bonusTip()
+bonus_label = rt.lbl(rt.root, text ="(6) Print the '' which its salary less than '' ", font="sans-serif").grid(column=0, row=10)
+bonus_button = rt.btn(rt.root, text="Print", padx=5, command=bonustip.print_btn, bg="gray").grid(column=3, row=10)
 rt.root.mainloop()
