@@ -198,6 +198,53 @@ class bonusTip(WuzzufGui, ReadCsvData):
         myVal = self.df.loc[self.df.salary_minimum <= int(self.val2.get()), self.val1.get()]
         print(myVal)
 
+    '''Class <printDesc> is printing a description for the desired job'''
+class printDesc(WuzzufGui, ReadCsvData):
+    from tkinter import StringVar
+    from tkinter import ttk
+
+    # Read app_sample Data
+    df = pd.DataFrame(ReadCsvData.posts_sample)
+
+    jobTitles = df.ix[:, 'job_title']
+    jobTitles_set = set(jobTitles)
+    jobTitles_list = [x for x in jobTitles_set]
+
+    val = StringVar()
+
+    combo = ttk.Combobox(width=25, textvariable=val)
+    combo.grid(column=1, row=12)
+    combo['values'] = jobTitles_list
+
+    def print_btn(self):
+        myVal = self.df.loc[self.df.job_title == self.val.get(), 'job_description']
+        print(myVal)
+
+
+'''Class <printAllRecords> is printing all records for the desired job'''
+
+
+class printAllRecords(WuzzufGui, ReadCsvData):
+    from tkinter import StringVar
+    from tkinter import ttk
+
+    # Read app_sample Data
+    df = pd.DataFrame(ReadCsvData.posts_sample)
+
+    jobTitles = df.ix[:, 'job_title']
+    jobTitles_set = set(jobTitles)
+    jobTitles_list = [x for x in jobTitles_set]
+
+    val = StringVar()
+
+    combo = ttk.Combobox(width=25, textvariable=val)
+    combo.grid(column=1, row=14)
+    combo['values'] = jobTitles_list
+
+    def print_btn(self):
+        myVal = self.df.loc[self.df.job_title == self.val.get(), :]
+        print(myVal)
+
 rt = WuzzufGui() # Draw the Ui
 
 # Category Data
@@ -238,4 +285,15 @@ mean_button = rt.btn(rt.root, text="Mean Salaries", padx=5, command=meansalary.m
 bonustip = bonusTip()
 bonus_label = rt.lbl(rt.root, text ="(6) Print the '' which its salary less than '' ", font="sans-serif").grid(column=0, row=10)
 bonus_button = rt.btn(rt.root, text="Print", padx=5, command=bonustip.print_btn, bg="gray").grid(column=3, row=10)
+
+# Print Description
+printdesc = printDesc()
+printdesc_label = rt.lbl(rt.root, text="(7) Print Description for the job: ", font="sans-serif").grid(column=0, row=12)
+printdesc_button = rt.btn(rt.root, text="Describe", padx=5, command=printdesc.print_btn, bg="gray").grid(column=2, row=12)
+
+# Print Description
+printallrecords = printAllRecords()
+printallrecords_label = rt.lbl(rt.root, text="(8) Print all records for the job: ", font="sans-serif").grid(column=0, row=14)
+printallrecords_button = rt.btn(rt.root, text="Describe", padx=5, command=printallrecords.print_btn, bg="gray").grid(column=2, row=14)
+
 rt.root.mainloop()

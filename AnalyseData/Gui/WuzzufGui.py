@@ -10,7 +10,7 @@ from tkinter import *
 
 class WuzzufGui:
     root = Tk()
-    root.geometry("800x700")
+    root.geometry("795x430")
     root.title("Wuzzuf Data Analysis")
     btn = Button
     lbl = Label
