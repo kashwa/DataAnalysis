@@ -3,6 +3,12 @@ from tkinter import ttk
 import matplotlib.pyplot as plt
 import pandas as pd
 
+'''
+Testing for the Whole Project Over period of time
+and Step by Step... Analysis is Done For Wuzzuf Datasets.
+'''
+
+
 
 posts_sample = pd.read_csv("AnalyseData/Wuzzuf_Job_Posts_Sample.csv")
 app_sample = pd.read_csv("AnalyseData/Wuzzuf_Applications_Sample.csv")
@@ -62,44 +68,6 @@ combo1['values'] = list_of_index
 combo2 = ttk.Combobox(width=15, textvariable = val2)
 combo2.grid(column=1, row=0)
 combo2['values'] = salaries
-
-
-
-
-
-
-
-
-#
-
-
-
-
-
-
-#
-#
-
-'''textvariable=lstvar >>> beside 15'''
-#combo = ttk.Combobox(width=25)
-#combo['values'] = job_list
-#combo.grid(column=0, row=1)
-
-
-#btn = ttk.Button(text="ClickMe").grid(column=0, row=3)
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 views = df.ix[:, 'views'].head(5)
