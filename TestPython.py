@@ -9,48 +9,41 @@ app_sample = pd.read_csv("AnalyseData/Wuzzuf_Applications_Sample.csv")
 
 df = pd.DataFrame(posts_sample)
 
-
-'''حلو..كدة
- قدرت الف على اتنين ليست 
- و اجمع العناصر اللى جواهم
-  و حسبتلهم المتوسط كمان 
-  ..طبقهاعلى الوظايف'''
-
-l = [1, 2, 3, 4, 5]
-k = [2, 4, 6, 8, 7]
-
-e = []
-for i in range(len(l)):
-   e.append((l[i] + k[i])/2.0)
-
-
-
-
-
-
-
-
-
-
-
-
-'''الفكرة هنا انه هايعرض عدد سنين الخبرة
- للوظايف اللى مرتبها اقل من رقم معين'''
-
-
-
-
-
-
-
-
-
-
-
-
-
 root = Tk()
 root.geometry("400x200")
+#x = df.loc[df.job_title == 'Sales & Marketing Agent', df.job_description]
+
+jobTitles = df.ix[:, 'job_title'].head(5)
+# siz = views.value_counts()
+
+jobTitles_set = set(jobTitles)
+jobTitles_list = [x for x in jobTitles_set]
+
+
+
+x = df.loc[df.job_title == 'Sales & Marketing Agent', 'job_description']
+
+val = StringVar()
+combo = ttk.Combobox(width=25, textvariable = val)
+combo.grid(column=0, row=0)
+combo['values'] = jobTitles_list
+
+
+def print_btn():
+   myVal = df.loc[df.job_title == val.get(), :]
+   print(myVal)
+
+
+bttn = ttk.Button(text="print", command=print_btn).grid(column=1, row=2)
+
+root.mainloop()
+
+
+
+
+
+
+
 
 '''Those 2 will be in combo box'''
 list_of_index = [x for x in df]
@@ -72,14 +65,12 @@ combo2['values'] = salaries
 
 
 
-def print_btn():
-   myVal = df.loc[df.salary_minimum <= int(val2.get()), val1.get()]
-   print(myVal)
-
-bttn = ttk.Button(text="print", command=print_btn).grid(column=1, row=2)
 
 
-root.mainloop()
+
+
+
+#
 
 
 
@@ -90,12 +81,12 @@ root.mainloop()
 #
 
 '''textvariable=lstvar >>> beside 15'''
-combo = ttk.Combobox(width=25)
-combo['values'] = job_list
-combo.grid(column=0, row=1)
+#combo = ttk.Combobox(width=25)
+#combo['values'] = job_list
+#combo.grid(column=0, row=1)
 
 
-btn = ttk.Button(text="ClickMe").grid(column=0, row=3)
+#btn = ttk.Button(text="ClickMe").grid(column=0, row=3)
 
 
 
