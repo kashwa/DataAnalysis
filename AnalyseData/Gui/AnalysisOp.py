@@ -3,6 +3,16 @@ from WuzzufGui import WuzzufGui
 import pandas as pd
 import matplotlib.pyplot as plt
 
+from tkinter import *
+import tkinter as Tk
+from tkinter import ttk
+
+import matplotlib
+matplotlib.use("TkAgg")
+
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.figure import Figure
+
 '''Class <CategoryPChart> to draw Pie chart for the first 3 categories'''
 
 
@@ -11,35 +21,69 @@ class CategoryPChart(WuzzufGui, ReadCsvData):
     df = pd.DataFrame(ReadCsvData.posts_sample)
 
     def category1PieChart(self):
+        root = Tk.Tk()
+        root.geometry("400x400")
+        figure2 = Figure(figsize=(5, 4), dpi=100)
+        subplot2 = figure2.add_subplot(111)
 
-        # search for "category" in df.
         category1 = self.df.ix[:, 'job_category1'].head(7)
-
-        '''The Count of each item => So, this can be slices'''
         siz = category1.value_counts()
-
-        '''To make it Unique => So, this can be [Labels]'''
         cat_set = set(category1)
-        plt.pie(siz, labels=cat_set, autopct='%1.1f%%')
-        plt.show()
+
+        labels = cat_set
+        pieSizes = siz
+
+        subplot2.pie(pieSizes, labels=labels, autopct='%1.1f%%', shadow=True, startangle=90)
+        subplot2.axis('equal')
+        pie2 = FigureCanvasTkAgg(figure2, root)  # create a canvas figure (matplotlib module)
+        pie2.get_tk_widget().pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
+
+        root.mainloop()
 
     # Draw Category-2 Pie Chart
     def category2PieChart(self):
-        # search for "category 2" in df.
+        root = Tk.Tk()
+        root.geometry("400x400")
+        figure = Figure(figsize=(5, 4), dpi=100)
+        subplot = figure.add_subplot(111)
+
+
         category2 = self.df.ix[:, 'job_category2'].head(7)
         siz = category2.value_counts()
         cat_set = set(category2)
-        plt.pie(siz, labels=cat_set, autopct='%1.1f%%')
-        plt.show()
+
+        labels = cat_set
+        pieSizes = siz
+
+        subplot.pie(pieSizes, labels=labels, autopct='%1.1f%%', shadow=True, startangle=90)
+        subplot.axis('equal')
+        pie2 = FigureCanvasTkAgg(figure, root)  # create a canvas figure (matplotlib module)
+        pie2.get_tk_widget().pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
+
+        root.mainloop()
 
     # Draw Category-3 Pie Chart
     def category3PieChart(self):
+        root = Tk.Tk()
+        root.geometry("400x400")
+        figure = Figure(figsize=(5, 4), dpi=100)
+        subplot = figure.add_subplot(111)
+
+
         # search for "category 2" in df.
-        category3 = self.df.ix[:, 'job_category3'].head(7)
+        category3 = self.df.ix[:, 'job_category3'].head(15)
         siz = category3.value_counts()
         cat_set = set(category3)
-        plt.pie(siz, labels=cat_set, autopct='%1.1f%%')
-        plt.show()
+
+        labels = cat_set
+        pieSizes = siz
+
+        subplot.pie(pieSizes, labels=labels, autopct='%1.1f%%', shadow=True, startangle=90)
+        subplot.axis('equal')
+        pie2 = FigureCanvasTkAgg(figure, root)  # create a canvas figure (matplotlib module)
+        pie2.get_tk_widget().pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
+
+        root.mainloop()
 
 
 '''Class <IndustryPChart> to draw Pie chart for the first 3 Industries'''
@@ -50,25 +94,64 @@ class IndustryPChart(WuzzufGui, ReadCsvData):
     df = pd.DataFrame(ReadCsvData.posts_sample)
 
     def industry1PieChart(self):
+        root = Tk.Tk()
+        root.geometry("400x400")
+        figure = Figure(figsize=(5, 4), dpi=100)
+        subplot = figure.add_subplot(111)
+
         indust1 = self.df.ix[:, 'job_industry1'].head(7)
         siz = indust1.value_counts()
         indust_set = set(indust1)
-        plt.pie(siz, labels=indust_set, autopct='%1.1f%%')
-        plt.show()
+
+        labels = indust_set
+        pieSizes = siz
+
+        subplot.pie(pieSizes, labels=labels, autopct='%1.1f%%', shadow=False, startangle=90)
+        subplot.axis('equal')
+        pie2 = FigureCanvasTkAgg(figure, root)  # create a canvas figure (matplotlib module)
+        pie2.get_tk_widget().pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
+
+        root.mainloop()
 
     def industry2PieChart(self):
+        root = Tk.Tk()
+        root.geometry("400x400")
+        figure = Figure(figsize=(5, 4), dpi=100)
+        subplot = figure.add_subplot(111)
+
         indust2 = self.df.ix[:, 'job_industry2'].head(7)
         siz = indust2.value_counts()
         indust_set = set(indust2)
-        plt.pie(siz, labels=indust_set, autopct='%1.1f%%')
-        plt.show()
+
+        labels = indust_set
+        pieSizes = siz
+
+        subplot.pie(pieSizes, labels=labels, autopct='%1.1f%%', shadow=True, startangle=90)
+        subplot.axis('equal')
+        pie2 = FigureCanvasTkAgg(figure, root)  # create a canvas figure (matplotlib module)
+        pie2.get_tk_widget().pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
+
+        root.mainloop()
 
     def industry3PieChart(self):
+        root = Tk.Tk()
+        root.geometry("400x400")
+        figure = Figure(figsize=(5, 4), dpi=100)
+        subplot = figure.add_subplot(111)
+
         indust3 = self.df.ix[:, 'job_industry3'].head(7)
         siz = indust3.value_counts()
         indust_set = set(indust3)
-        plt.pie(siz, labels=indust_set, autopct='%1.1f%%')
-        plt.show()
+
+        labels = indust_set
+        pieSizes = siz
+
+        subplot.pie(pieSizes, labels=labels, autopct='%1.1f%%', shadow=True, startangle=90)
+        subplot.axis('equal')
+        pie2 = FigureCanvasTkAgg(figure, root)  # create a canvas figure (matplotlib module)
+        pie2.get_tk_widget().pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
+
+        root.mainloop()
 
 
 class ApplicantsJU(WuzzufGui, ReadCsvData):
@@ -76,6 +159,9 @@ class ApplicantsJU(WuzzufGui, ReadCsvData):
     df = pd.DataFrame(ReadCsvData.app_sample)
 
     def JobUserApplicant(self):
+        root = Tk.Tk()
+        root.geometry("400x400")
+
         userID = self.df.ix[:, 'user_id'].head(15)  # xLabel
         jobID = self.df.ix[:, 'job_id'].tail(15)  # yLabel
 
@@ -83,13 +169,24 @@ class ApplicantsJU(WuzzufGui, ReadCsvData):
         userList = list(userID)
         jobList = list(jobID)
 
-        plt.bar(jobList, userList, label="Applicants")
-        plt.xlabel("Job")
-        plt.ylabel("User")
-        plt.legend()
-        plt.show()
+        f = Figure(figsize=(5, 4), dpi=100)
+        ax_subplt = f.add_subplot(111)
+        index = userID
+        data = jobID
+        width = .5
+
+        rects1 = ax_subplt.bar(index, data, width)
+
+        canvas = FigureCanvasTkAgg(f, master=root)
+        canvas.show()
+        canvas.get_tk_widget().pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
+
+        root.mainloop()
 
     def UserJobApplicant(self):
+        root = Tk.Tk()
+        root.geometry("400x400")
+
         # Read app_sample Data
         df = pd.DataFrame(ReadCsvData.app_sample)
 
@@ -101,11 +198,20 @@ class ApplicantsJU(WuzzufGui, ReadCsvData):
         for user in uList:
             counter.append(uList.count(user))
 
-        plt.bar(uList, counter, label="Users Appl")
-        plt.xlabel("User ID")
-        plt.ylabel("#Applicant")
-        plt.legend()
-        plt.show()
+        f = Figure(figsize=(5, 4), dpi=100)
+        ax_subplt = f.add_subplot(111)
+
+        index = uList #xLabel
+        data = counter   #yLabel
+        width = .5
+
+        rects1 = ax_subplt.bar(index, data, width)
+
+        canvas = FigureCanvasTkAgg(f, master=root)
+        canvas.show()
+        canvas.get_tk_widget().pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
+
+        root.mainloop()
 
 
 '''Class of City Bar Chart >> print bar chart for each job within a unique city'''
@@ -116,17 +222,35 @@ class CityBarChart(WuzzufGui, ReadCsvData):
     df = pd.DataFrame(ReadCsvData.posts_sample)
 
     def cityBCh(self):
+        root = Tk.Tk()
+        root.geometry("400x400")
+
         cities = self.df.ix[:, 'city'].head(15)
         siz = cities.value_counts()
         city_set = set(cities)
         # Convert set to List, so it can match in bar chart.
         city_list = [city for city in city_set]
 
-        plt.bar(city_list, siz, label="Cities")
-        plt.legend()
-        plt.show()
+        f = Figure(figsize=(5, 4), dpi=100)
+        ax_subplt = f.add_subplot(111)
+
+        index = city_list  # xLabel
+        data = siz  # yLabel
+        width = .5
+
+        rects1 = ax_subplt.bar(index, data, width)
+
+        canvas = FigureCanvasTkAgg(f, master=root)
+        canvas.show()
+        canvas.get_tk_widget().pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
+
+        root.mainloop()
+
 
     def viewsBch(self):
+        root = Tk.Tk()
+        root.geometry("400x400")
+
         views = self.df.ix[:, 'views'].head(5)
         id = self.df.ix[:, 'id'].head(5)
 
@@ -136,14 +260,24 @@ class CityBarChart(WuzzufGui, ReadCsvData):
         id_set = set(id)
         id_list = [i for i in id_set]
 
-        plt.bar(id_list, view_list, label="Views")
-        plt.xlabel("Id")
-        plt.ylabel("Views")
-        plt.legend()
-        plt.show()
+        f = Figure(figsize=(5, 4), dpi=100)
+        ax_subplt = f.add_subplot(111)
+
+        index = id_list  # xLabel
+        data = view_list  # yLabel
+        width = .5
+
+        rects1 = ax_subplt.bar(index, data, width)
+
+        canvas = FigureCanvasTkAgg(f, master=root)
+        canvas.show()
+        canvas.get_tk_widget().pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
+
+        root.mainloop()
 
 
-'''Class meanSalaries prints all jobs and the mean salary of each one'''
+'''Class meanSalaries prints all jobs and the mean salary of each one
+    Printed into Terminal coz, itis not Well designed in GUI.'''
 
 class meanSalaries(WuzzufGui, ReadCsvData):
     # Read app_sample Data
@@ -169,7 +303,8 @@ class meanSalaries(WuzzufGui, ReadCsvData):
         print(mean)
 
 
-'''Bonus Tip: Print some values that salary is less than some value'''
+'''Bonus Tip: Print some values that salary is less than some value
+    Printed into Terminal coz, itis not Well designed in GUI.'''
 
 
 class bonusTip(WuzzufGui, ReadCsvData):
@@ -295,5 +430,6 @@ printdesc_button = rt.btn(rt.root, text="Describe", padx=5, command=printdesc.pr
 printallrecords = printAllRecords()
 printallrecords_label = rt.lbl(rt.root, text="(8) Print all records for the job: ", font="sans-serif").grid(column=0, row=14)
 printallrecords_button = rt.btn(rt.root, text="Describe", padx=5, command=printallrecords.print_btn, bg="gray").grid(column=2, row=14)
+
 
 rt.root.mainloop()
