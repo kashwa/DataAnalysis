@@ -284,11 +284,14 @@ class meanSalaries(WuzzufGui, ReadCsvData):
     df = pd.DataFrame(ReadCsvData.posts_sample)
 
     def meanSalary(self):
-        job_titles = self.df.ix[:, 'job_title']
+        root2 = Tk.Tk()
+        root2.geometry("400x400")
+
+        job_titles = self.df.ix[:, 'job_title'].tail(7)
         job_set = set(job_titles)
         job_list = [x for x in job_set]
 
-        min_s = self.df.ix[:, 'salary_minimum']
+        min_s = self.df.ix[:, 'salary_minimum'].tail(7)
         min_set = set(min_s)
         min_list = [x for x in min_set]
 
@@ -297,10 +300,19 @@ class meanSalaries(WuzzufGui, ReadCsvData):
         max_list = [x for x in max_set]
 
         mean = []
-        for i in range(len(max_list)):
+        for i in range(len(min_list)):
             mean.append((max_list[i] + min_list[i]) / 2.0)
-        print(job_list)
-        print(mean)
+
+        job_Str = ', \n'.join(str(j) for j in job_list)
+        salary_str = ', \n'.join(str(s) for s in min_list)
+
+        lbl = ttk.Label(text=job_Str, master=root2)
+        lbl.grid(column=0, row=1)
+
+        lbl2 = ttk.Label(text=salary_str, master=root2)
+        lbl2.grid(column=5, row=1)
+
+        root2.mainloop()
 
 
 '''Bonus Tip: Print some values that salary is less than some value
@@ -310,6 +322,7 @@ class meanSalaries(WuzzufGui, ReadCsvData):
 class bonusTip(WuzzufGui, ReadCsvData):
     from tkinter import StringVar
     from tkinter import ttk
+
     # Read app_sample Data
     df = pd.DataFrame(ReadCsvData.posts_sample)
 
@@ -330,8 +343,16 @@ class bonusTip(WuzzufGui, ReadCsvData):
     combo2['values'] = salaries
 
     def print_btn(self):
+        root3 = Tk.Tk()
+        root3.geometry("400x600")
+
         myVal = self.df.loc[self.df.salary_minimum <= int(self.val2.get()), self.val1.get()]
-        print(myVal)
+        # print(myVal)
+        label = ttk.Label(text=myVal, master=root3)
+        label.pack()
+
+        root3.mainloop()
+
 
     '''Class <printDesc> is printing a description for the desired job'''
 class printDesc(WuzzufGui, ReadCsvData):
@@ -352,8 +373,15 @@ class printDesc(WuzzufGui, ReadCsvData):
     combo['values'] = jobTitles_list
 
     def print_btn(self):
+        root3 = Tk.Tk()
+        root3.geometry("400x320")
+
         myVal = self.df.loc[self.df.job_title == self.val.get(), 'job_description']
-        print(myVal)
+
+        label = ttk.Label(text=myVal, master=root3)
+        label.pack()
+
+        root3.mainloop()
 
 
 '''Class <printAllRecords> is printing all records for the desired job'''
@@ -377,8 +405,16 @@ class printAllRecords(WuzzufGui, ReadCsvData):
     combo['values'] = jobTitles_list
 
     def print_btn(self):
+        root3 = Tk.Tk()
+        root3.geometry("400x450")
+
         myVal = self.df.loc[self.df.job_title == self.val.get(), :]
-        print(myVal)
+
+        label = ttk.Label(text=myVal, master=root3)
+        label.pack()
+
+        root3.mainloop()
+
 
 rt = WuzzufGui() # Draw the Ui
 
