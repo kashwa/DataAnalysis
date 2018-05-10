@@ -66,6 +66,7 @@ myVal = df.loc[df.salary_minimum <= 2500, 'job_title']
 label = ttk.Label(text=myVal)
 label.pack()
 
+
 # job_Str = ', \n'.join(str(j) for j in job_list)
 # salary_str = ', \n'.join(str(s) for s in min_list)
 
